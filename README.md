@@ -3,3 +3,7 @@ iptables -t mangle -A PREROUTING -m set --match-set ROSKOMNADZOR_BANNED dst -j M
 echo 128 rknban >> /etc/iproute2/rt_tables
 ip rule add from all fwmark 0x1 lookup rknban
 ```
+
+Related
+-------
+* [https://github.com/marodere/rublacklist](https://github.com/marodere/rublacklist)
