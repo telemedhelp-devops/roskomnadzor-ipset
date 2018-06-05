@@ -1,10 +1,12 @@
 #!/bin/bash
 
+curl -s https://api.antizapret.info/all.php > /tmp/antizapret.dump
+
 ipset create ROSKOMNADZOR_BANNED hash:net maxelem 134217728 hashsize 65536
 
 declare -A IS_BANNED
 
-for ADDR in $(grep -Eo '[0-9][0-9]*\.[0-9]*\.[0-9]*\.[0-9]*([/][0-9]*)?' raw-list/dump.csv); do
+for ADDR in $(grep -Eo '[0-9][0-9]*\.[0-9]*\.[0-9]*\.[0-9]*([/][0-9]*)?' /tmp/antizapret.dump); do
 	ipset add ROSKOMNADZOR_BANNED "$ADDR"
 	IS_BANNED[$ADDR]=1
 done
